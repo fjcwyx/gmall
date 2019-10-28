@@ -3,7 +3,7 @@
 
 <mapper namespace="com.atguigu.modules.sys.dao.SysUserTokenDao">
 
-	<select id="queryByToken" resultType="com.atguigu.modules.sys.entity.SysUserTokenEntity">
-		select * from sys_user_token where token = #{value}
-	</select>
+    <select id="queryByToken" resultType="com.atguigu.modules.sys.entity.SysUserTokenEntity">
+        select * from sys_user_token where token = #{value}
+    </select>
 </mapper>
