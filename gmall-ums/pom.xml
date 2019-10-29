@@ -8,11 +8,11 @@
         <version>2.2.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.fjc</groupId>
-    <artifactId>gmall-sms</artifactId>
+    <groupId>com.atguigu</groupId>
+    <artifactId>gmall-ums</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gmall-sms</name>
-    <description>营销管理系统</description>
+    <name>gmall-ums</name>
+    <description>用户管理模块</description>
 
     <properties>
         <java.version>1.8</java.version>

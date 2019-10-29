@@ -9,7 +9,7 @@
         function (key, value) {
             return key === "" ? value : decodeURIComponent(value)
         }
-    ) : {}
+    ) : {};
 
     if (window.opener.swaggerUiAuth.tokenUrl)
         window.opener.processOAuthCode(qp);
