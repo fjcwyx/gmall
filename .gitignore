@@ -2,6 +2,9 @@ mvnw*
 .mvn/
 .idea/
 workspace.xml
+Dockerfile
+LICENSE
+docker-compose*
 # Compiled class file
 *.class
 
