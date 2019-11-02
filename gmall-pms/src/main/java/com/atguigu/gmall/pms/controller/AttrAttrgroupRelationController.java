@@ -1,22 +1,19 @@
 package com.atguigu.gmall.pms.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.pms.entity.AttrAttrgroupRelationEntity;
+import com.atguigu.gmall.pms.service.AttrAttrgroupRelationService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.pms.entity.AttrAttrgroupRelationEntity;
-import com.atguigu.gmall.pms.service.AttrAttrgroupRelationService;
-
-
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -32,6 +29,14 @@ import com.atguigu.gmall.pms.service.AttrAttrgroupRelationService;
 public class AttrAttrgroupRelationController {
     @Autowired
     private AttrAttrgroupRelationService attrAttrgroupRelationService;
+
+    @ApiOperation("删除关联关系")
+    @PostMapping("/delete/attr")
+    public Resp<String> deleteAttr(@RequestBody List<AttrAttrgroupRelationEntity> attrRelations){
+
+        this.attrAttrgroupRelationService.remove(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrRelations.get(0).getAttrGroupId()).eq("attr_id", attrRelations.get(0).getAttrId()));
+        return Resp.ok("删除成功");
+    }
 
     /**
      * 列表

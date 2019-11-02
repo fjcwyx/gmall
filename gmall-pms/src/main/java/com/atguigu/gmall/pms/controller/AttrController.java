@@ -5,6 +5,7 @@ import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
 import com.atguigu.gmall.pms.entity.AttrEntity;
 import com.atguigu.gmall.pms.service.AttrService;
+import com.atguigu.gmall.pms.vo.AttrVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,14 @@ import java.util.Arrays;
 public class AttrController {
     @Autowired
     private AttrService attrService;
+
+
+    @ApiOperation("根据类型和id分页查询基本分组和销售分组")
+    @GetMapping()
+    public Resp<PageVo> queryAttrByTypeAndCid(@RequestParam("type")Integer type,@RequestParam("cid")Long cid,QueryCondition queryCondition){
+        PageVo page = attrService.queryAttrByTypeAndCid(type,cid,queryCondition);
+        return Resp.ok(page);
+    }
 
     /**
      * 列表
@@ -61,8 +70,8 @@ public class AttrController {
     @ApiOperation("保存")
     @PostMapping("/save")
     @PreAuthorize("hasAuthority('pms:attr:save')")
-    public Resp<Object> save(@RequestBody AttrEntity attr){
-		attrService.save(attr);
+    public Resp<Object> save(@RequestBody AttrVO attrVO){
+        this.attrService.saveAttrAndRelation(attrVO);
 
         return Resp.ok(null);
     }

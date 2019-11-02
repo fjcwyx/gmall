@@ -5,6 +5,8 @@ import com.atguigu.gmall.pms.entity.CategoryEntity;
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 
+import java.util.List;
+
 
 /**
  * 商品三级分类
@@ -12,9 +14,12 @@ import com.atguigu.core.bean.QueryCondition;
  * @author fjc
  * @email 1134118878@qq.com
  * @date 2019-10-28 23:08:48
+ *
  */
 public interface CategoryService extends IService<CategoryEntity> {
 
     PageVo queryPage(QueryCondition params);
+
+    List<CategoryEntity> queryCategories(Integer level, Long parentCid);
 }
 

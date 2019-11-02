@@ -1,22 +1,19 @@
 package com.atguigu.gmall.pms.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.pms.entity.AttrGroupEntity;
+import com.atguigu.gmall.pms.service.AttrGroupService;
+import com.atguigu.gmall.pms.vo.AttrGroupVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.pms.entity.AttrGroupEntity;
-import com.atguigu.gmall.pms.service.AttrGroupService;
-
-
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -30,8 +27,34 @@ import com.atguigu.gmall.pms.service.AttrGroupService;
 @RestController
 @RequestMapping("pms/attrgroup")
 public class AttrGroupController {
+
     @Autowired
     private AttrGroupService attrGroupService;
+
+    @ApiOperation("根据分类id查询组和组下的所有信息")
+    @GetMapping("/withattrs/cat/{catId}")
+    public Resp<List<AttrGroupVO>> queryAttrByCId(@PathVariable(value = "catId",required = true)Long catId){
+        System.out.println("controller======="+catId);
+        List<AttrGroupVO> groupVos = this.attrGroupService.queryAttrByCId(catId);
+        return Resp.ok(groupVos);
+    }
+
+    @ApiOperation("根据组id查询组下的所有属性")
+    @GetMapping("/withattr/{gid}")
+    public Resp<AttrGroupVO> queryAttrByGroupId(@PathVariable(value = "gid",required = true)Long gid){
+        AttrGroupVO groupVo = this.attrGroupService.queryAttrByGroupId(gid);
+        return Resp.ok(groupVo);
+    }
+
+
+    @ApiOperation("根据分类id分页查询数据")
+    @GetMapping("/{catId}")
+    public Resp<PageVo> queryByCidPage(@PathVariable(value = "catId",required = true)Long catId,QueryCondition queryCondition){
+
+        PageVo page = attrGroupService.queryByCidPage(catId,queryCondition);
+
+        return Resp.ok(page);
+    }
 
     /**
      * 列表

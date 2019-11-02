@@ -29,6 +29,7 @@ public class OSSController {
          * AccessKeySecret 4HzKz1VvYKQbm8cuIbktO5r7kQPrSs
          */
 
+
         String accessId = "LTAI4FwSojfRgW7saF97xXEd"; // 请填写您的AccessKeyId。
         String accessKey = "4HzKz1VvYKQbm8cuIbktO5r7kQPrSs"; // 请填写您的AccessKeySecret。
         String endpoint = "oss-cn-shanghai.aliyuncs.com"; // 请填写您的 endpoint。
@@ -61,7 +62,6 @@ public class OSSController {
             respMap.put("host", host);
             respMap.put("expire", String.valueOf(expireEndTime / 1000));
             // respMap.put("expire", formatISO8601Date(expiration));
-
             return Resp.ok(respMap);
 
         } catch (Exception e) {
