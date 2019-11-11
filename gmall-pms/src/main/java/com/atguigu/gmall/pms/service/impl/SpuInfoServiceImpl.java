@@ -4,8 +4,12 @@ import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.Query;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.gmall.pms.dao.*;
-import com.atguigu.gmall.pms.entity.*;
+import com.atguigu.gmall.pms.entity.SkuImagesEntity;
+import com.atguigu.gmall.pms.entity.SkuInfoEntity;
+import com.atguigu.gmall.pms.entity.SkuSaleAttrValueEntity;
+import com.atguigu.gmall.pms.entity.SpuInfoEntity;
 import com.atguigu.gmall.pms.feign.GmallSmsFeign;
+import com.atguigu.gmall.pms.service.SpuInfoDescService;
 import com.atguigu.gmall.pms.service.SpuInfoService;
 import com.atguigu.gmall.pms.vo.ProductAttrValueVO;
 import com.atguigu.gmall.pms.vo.SkuInfoVO;
@@ -17,6 +21,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -74,34 +79,29 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
     @Autowired
     private GmallSmsFeign gmallSmsFeign;
 
+    @Autowired
+    private SpuInfoDescService spuInfoDescService;
+
+
     @Override
+    @Transactional
     public void bigSave(SpuInfoVO spuInfoVO) {
         //1 保存spu相关信息
         //1.1 保存pms_spu_info表信息
-        spuInfoVO.setCreateTime(new Date());
-        spuInfoVO.setUodateTime(spuInfoVO.getCreateTime());
-        this.save(spuInfoVO);
+        Long spu_id = saveSpuInfo(spuInfoVO);
 
-        Long spu_id = spuInfoVO.getId();
         //1.2 保存pms_spu_info_desc表信息
-        List<String> spuImages = spuInfoVO.getSpuImages();
-        String desc = org.apache.commons.lang.StringUtils.join(spuImages, ",");
-        SpuInfoDescEntity spuInfoDescEntity = new SpuInfoDescEntity();
-        spuInfoDescEntity.setSpuId(spu_id);
-        spuInfoDescEntity.setDecript(desc);
-        this.spuInfoDescDao.insert(spuInfoDescEntity);
+        this.spuInfoDescService.saveSpuDesc(spuInfoVO, spu_id);
+
         //1.3 保存pms_product_attr_value表信息
-        List<ProductAttrValueVO> baseAttrs = spuInfoVO.getBaseAttrs();
-        baseAttrs.forEach(baseAttr -> {
-            baseAttr.setSpuId(spu_id);
+        saveBaseAttrs(spuInfoVO, spu_id);
 
-            baseAttr.setAttrSort(0);
-            baseAttr.setQuickShow(1);
-            this.productAttrValueDao.insert(baseAttr);
-
-        });
         //2 保存sku相关信息
         //2.1保存pms_sku_info表信息
+        saveSkuInfoWithSaleInfo(spuInfoVO, spu_id);
+    }
+
+    public void saveSkuInfoWithSaleInfo(SpuInfoVO spuInfoVO, Long spu_id) {
         List<SkuInfoVO> skus = spuInfoVO.getSkus();
         if (CollectionUtils.isEmpty(skus)){
             return;
@@ -146,6 +146,27 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             saleVO.setSkuId(sku_Id);
             this.gmallSmsFeign.saveSaleVo(saleVO);
         });
+    }
+
+    public void saveBaseAttrs(SpuInfoVO spuInfoVO, Long spu_id) {
+        List<ProductAttrValueVO> baseAttrs = spuInfoVO.getBaseAttrs();
+        baseAttrs.forEach(baseAttr -> {
+            baseAttr.setSpuId(spu_id);
+
+            baseAttr.setAttrSort(0);
+            baseAttr.setQuickShow(1);
+            this.productAttrValueDao.insert(baseAttr);
+
+        });
+    }
+
+
+
+    public Long saveSpuInfo(SpuInfoVO spuInfoVO) {
+        spuInfoVO.setCreateTime(new Date());
+        spuInfoVO.setUodateTime(spuInfoVO.getCreateTime());
+        this.save(spuInfoVO);
+        return spuInfoVO.getId();
     }
 
 
