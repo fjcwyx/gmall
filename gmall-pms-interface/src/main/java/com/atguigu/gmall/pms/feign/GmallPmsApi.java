@@ -33,4 +33,6 @@ public interface GmallPmsApi {
 
     @PostMapping("pms/spuinfo/{status}")
     public Resp<List<SpuInfoEntity>> querySpuInfoByStatus(@RequestBody QueryCondition condition, @PathVariable("status")Integer status);
+
+
 }

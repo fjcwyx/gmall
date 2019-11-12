@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Data
 public class SearchResponseAttrVO implements Serializable {
+
     private Long productAttributeId;//1
     //当前属性值的所有值
     private List<String> value = new ArrayList<>();

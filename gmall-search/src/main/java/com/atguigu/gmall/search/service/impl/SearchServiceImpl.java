@@ -119,6 +119,8 @@ public class SearchServiceImpl implements SearchService {
         }).collect(Collectors.toList());
         response.setAttrs(attrVOS);
 
+
+
         // 解析商品列表的结果集
         List<GoodsVO> goodsVOS = result.getSourceAsObjectList(GoodsVO.class, false);
         response.setProducts(goodsVOS);

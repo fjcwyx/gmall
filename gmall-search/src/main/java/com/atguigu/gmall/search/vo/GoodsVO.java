@@ -28,7 +28,7 @@ public class GoodsVO {
     //展示的每个商品所需要的字段
     private Long id;  //skuId
     private String pic; //sku的默认图片
-    private String name;//这是需要检索的sku的标题
+    private String name;//这是需要检索的sku的标题+品牌的名称+三级分类名称
     private BigDecimal price;//sku-price；
     private Integer sale;//sku-sale 销量
     private Long stock;//sku-stock 库存

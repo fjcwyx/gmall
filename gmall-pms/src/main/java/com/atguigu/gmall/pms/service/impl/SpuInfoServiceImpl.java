@@ -18,6 +18,7 @@ import com.atguigu.sms.vo.SaleVO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Service("spuInfoService")
@@ -82,6 +81,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
     @Autowired
     private SpuInfoDescService spuInfoDescService;
 
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+
 
     @Override
     @Transactional
@@ -99,6 +101,15 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         //2 保存sku相关信息
         //2.1保存pms_sku_info表信息
         saveSkuInfoWithSaleInfo(spuInfoVO, spu_id);
+
+        sendMsg(spu_id,"insert");
+    }
+
+    private void sendMsg(Long spu_id,String type) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", spu_id);
+        map.put("type", type);
+        this.amqpTemplate.convertAndSend("GMALL-ITEM-EXCHANGE","item."+type,map);
     }
 
     public void saveSkuInfoWithSaleInfo(SpuInfoVO spuInfoVO, Long spu_id) {
@@ -160,16 +171,12 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         });
     }
 
-
-
     public Long saveSpuInfo(SpuInfoVO spuInfoVO) {
         spuInfoVO.setCreateTime(new Date());
         spuInfoVO.setUodateTime(spuInfoVO.getCreateTime());
         this.save(spuInfoVO);
         return spuInfoVO.getId();
     }
-
-
 }
 
 

@@ -57,6 +57,8 @@ class GmallSearchApplicationTests {
 
             // 遍历spu获取spu下的所有sku导入到索引库中
             for (SpuInfoEntity spuInfoEntity : spuInfoEntities) {
+
+
                 Resp<List<SkuInfoEntity>> skuResp = this.gmallPmsClient.querySkuBySpuId(spuInfoEntity.getId());
                 List<SkuInfoEntity> skuInfoEntities = skuResp.getData();
                 if (CollectionUtils.isEmpty(skuInfoEntities)){
@@ -81,6 +83,7 @@ class GmallSearchApplicationTests {
                     if (brandEntity != null) {
                         goodsVO.setBrandId(skuInfoEntity.getBrandId());
                         goodsVO.setBrandName(brandEntity.getName());
+                        goodsVO.setName(skuInfoEntity.getSkuTitle()+brandEntity.getName());
                     }
                     // 设置分类相关的
                     Resp<CategoryEntity> categoryEntityResp = this.gmallPmsClient.queryCategoryById(skuInfoEntity.getCatalogId());
@@ -88,7 +91,10 @@ class GmallSearchApplicationTests {
                     if (categoryEntity != null) {
                         goodsVO.setProductCategoryId(skuInfoEntity.getCatalogId());
                         goodsVO.setProductCategoryName(categoryEntity.getName());
+                        goodsVO.setName(skuInfoEntity.getSkuTitle()+brandEntity.getName()+categoryEntity.getName());
                     }
+
+
                     // 设置搜索属性
                     this.gmallPmsClient.querySearchAttrValue(spuInfoEntity.getId());
                     Resp<List<SpuAttributeValueVO>> searchAttrValueResp = this.gmallPmsClient.querySearchAttrValue(spuInfoEntity.getId());
