@@ -66,12 +66,14 @@ class GmallSearchApplicationTests {
                     GoodsVO goodsVO = new GoodsVO();
 
                     // 设置sku相关数据
+
+
                     goodsVO.setName(skuInfoEntity.getSkuTitle());
                     goodsVO.setId(skuInfoEntity.getSkuId());
                     goodsVO.setPic(skuInfoEntity.getSkuDefaultImg());
                     goodsVO.setPrice(skuInfoEntity.getPrice());
-                    goodsVO.setSale(100); // 销量
-                    goodsVO.setSort(0); // 综合排序
+                    goodsVO.setSale(100);   // 销量
+                    goodsVO.setSort(0);     // 综合排序
 
                     // 设置品牌相关的
                     Resp<BrandEntity> brandEntityResp = this.gmallPmsClient.queryBrandById(skuInfoEntity.getBrandId());

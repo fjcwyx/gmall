@@ -1,0 +1,19 @@
+package com.atguigu.gmall.search.vo;
+
+import lombok.Data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by FJC on 2019-11-11.
+ */
+@Data
+public class SearchResponseAttrVO implements Serializable {
+    private Long productAttributeId;//1
+    //当前属性值的所有值
+    private List<String> value = new ArrayList<>();
+    //属性名称
+    private String name;//网络制式，分类
+}
