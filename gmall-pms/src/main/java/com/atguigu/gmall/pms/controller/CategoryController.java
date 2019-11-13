@@ -29,11 +29,19 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @ApiOperation("查询一级分类")
     @GetMapping
     public Resp<List<CategoryEntity>> queryCategories(@RequestParam(value = "level", defaultValue = "0")Integer level, @RequestParam(value = "parentCid", required = false)Long parentCid){
         List<CategoryEntity> categoryEntities = this.categoryService.queryCategories(level, parentCid);
 
         return Resp.ok(categoryEntities);
+    }
+
+    @ApiOperation("父id查询二级分类及其子分类")
+    @GetMapping("{pid}")
+    public Resp<List<CategoryEntity>> querySubCategory(@PathVariable("pid")Long pid){
+        List<CategoryEntity> categoryEntityList = this.categoryService.querySubCategory(pid);
+        return Resp.ok(categoryEntityList);
     }
 
     /**

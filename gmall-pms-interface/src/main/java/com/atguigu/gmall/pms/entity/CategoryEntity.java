@@ -1,12 +1,14 @@
 package com.atguigu.gmall.pms.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * 商品三级分类
@@ -67,5 +69,9 @@ public class CategoryEntity implements Serializable {
 	 */
 	@ApiModelProperty(name = "productCount",value = "商品数量")
 	private Integer productCount;
+
+	@TableField(exist = false) //是否为数据库字段，默认为true
+	private List<CategoryEntity> subs;
+
 
 }
