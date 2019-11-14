@@ -1,22 +1,18 @@
 package com.atguigu.gmall.pms.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.QueryCondition;
 import com.atguigu.core.bean.Resp;
+import com.atguigu.gmall.pms.entity.SkuSaleAttrValueEntity;
+import com.atguigu.gmall.pms.service.SkuSaleAttrValueService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.atguigu.gmall.pms.entity.SkuSaleAttrValueEntity;
-import com.atguigu.gmall.pms.service.SkuSaleAttrValueService;
-
-
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -32,6 +28,15 @@ import com.atguigu.gmall.pms.service.SkuSaleAttrValueService;
 public class SkuSaleAttrValueController {
     @Autowired
     private SkuSaleAttrValueService skuSaleAttrValueService;
+
+
+
+    @ApiOperation("根据spuid查询所有对应的sku的销售属性")
+    @GetMapping("/{spuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySaleAttrValues(@PathVariable("spuId") Long spuId) {
+        List<SkuSaleAttrValueEntity> SkuSaleAttrValueEntitys = skuSaleAttrValueService.querySaleAttrValues(spuId);
+        return Resp.ok(SkuSaleAttrValueEntitys);
+    }
 
     /**
      * 列表
