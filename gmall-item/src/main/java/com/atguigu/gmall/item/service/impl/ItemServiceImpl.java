@@ -43,6 +43,7 @@ public class ItemServiceImpl implements ItemService {
         ItemVO itemVO = new ItemVO();
 
         // 1. 查询sku信息
+        //创建异步对象，使用线程池、可接收返回值的构造函数创建
         CompletableFuture<SkuInfoEntity> skuCompletableFuture = CompletableFuture.supplyAsync(() -> {
             Resp<SkuInfoEntity> skuInfoEntityResp = this.gmallPmsClient.querySkuById(skuId);
             SkuInfoEntity skuInfoEntity = skuInfoEntityResp.getData();
@@ -50,7 +51,7 @@ public class ItemServiceImpl implements ItemService {
             return skuInfoEntity;
         }, threadPoolExecutor);
 
-
+        //接收上一步骤的返回值，接收任务的处理结果，无返回值
         CompletableFuture<Void> brandCompletableFuture = skuCompletableFuture.thenAcceptAsync(skuInfoEntity -> {
             // 2.品牌
             Resp<BrandEntity> brandEntityResp = this.gmallPmsClient.queryBrandById(skuInfoEntity.getBrandId());
