@@ -13,8 +13,10 @@ import java.util.List;
  * Created by FJC on 2019-11-10.
  */
 public interface GmallPmsApi {
+    @GetMapping("pms/skusaleattrvalue/sku/{skuId}")
+    public Resp<List<SkuSaleAttrValueEntity>> querySkuSaleAttrValueBySkuId(@PathVariable("skuId")Long skuId);
 
-    @GetMapping("pms/attrgroup/item/group/{cid}/{spuId}")
+        @GetMapping("pms/attrgroup/item/group/{cid}/{spuId}")
     public Resp<List<GroupVO>> queryGroupVOByCid(@PathVariable("cid")Long cid, @PathVariable("spuId")Long spuId);
 
     @GetMapping("pms/spuinfodesc/info/{spuId}")

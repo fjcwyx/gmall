@@ -7,3 +7,9 @@ spring:
         server-addr: 127.0.0.1:8848
   redis:
     host: 192.168.79.129
+auth:
+  jwt:
+    publicKeyPath: E:\\workspaceIDEA\\project\\tmp\\rsa\\rsa.pub # \u516C\u94A5\u5730\u5740
+    cookieName: GMALL_TOKEN
+    userKeyName: USER_KEY
+    expire: 25200
