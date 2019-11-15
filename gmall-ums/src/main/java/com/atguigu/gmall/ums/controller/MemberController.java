@@ -31,6 +31,46 @@ public class MemberController {
     private MemberService memberService;
 
     /**
+     * 检查数据是否合法
+     * @param data
+     * @param type
+     * @return
+     */
+    @GetMapping("check/{data}/{type}")
+    public Resp<Boolean> checkData(@PathVariable("data") String data, @PathVariable("type") Integer type) {
+        Boolean b = this.memberService.checkData(data, type);
+
+        return Resp.ok(b);
+    }
+    /**
+     * 注册
+     * @param memberEntity
+     * @param code
+     * @return
+     */
+    @PostMapping("register")
+    public Resp<Object> register(MemberEntity memberEntity, @RequestParam("code") String code) {
+        this.memberService.register(memberEntity, code);
+
+        return Resp.ok(null);
+    }
+    /**
+     * 根据用户名和密码查询用户
+     * @param username
+     * @param password
+     * @return
+     */
+    @GetMapping("query")
+    public Resp<MemberEntity> queryUser(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password
+    ) {
+        MemberEntity memberEntity = this.memberService.queryUser(username, password);
+
+        return Resp.ok(memberEntity);
+    }
+
+    /**
      * 列表
      */
     @ApiOperation("分页查询(排序)")

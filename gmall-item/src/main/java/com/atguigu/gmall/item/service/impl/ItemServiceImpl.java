@@ -50,20 +50,21 @@ public class ItemServiceImpl implements ItemService {
             BeanUtils.copyProperties(skuInfoEntity, itemVO);
             return skuInfoEntity;
         }, threadPoolExecutor);
-
-        //接收上一步骤的返回值，接收任务的处理结果，无返回值
+        //接收上一步骤的返回值(skuInfoEntity)，接收任务的处理结果，无返回值
         CompletableFuture<Void> brandCompletableFuture = skuCompletableFuture.thenAcceptAsync(skuInfoEntity -> {
             // 2.品牌
             Resp<BrandEntity> brandEntityResp = this.gmallPmsClient.queryBrandById(skuInfoEntity.getBrandId());
             itemVO.setBrand(brandEntityResp.getData());
         }, threadPoolExecutor);
 
+        //接收第一步的返回值，自己本身没有返回值
         CompletableFuture<Void> categoryCompletableFuture = skuCompletableFuture.thenAcceptAsync(skuInfoEntity -> {
             // 3.分类
             Resp<CategoryEntity> categoryEntityResp = this.gmallPmsClient.queryCategoryById(skuInfoEntity.getCatalogId());
             itemVO.setCategory(categoryEntityResp.getData());
         }, threadPoolExecutor);
 
+        //接收第一步的返回值，自己本身没有返回值
         CompletableFuture<Void> spuCompletableFuture = skuCompletableFuture.thenAcceptAsync(skuInfoEntity -> {
             // 4.spu信息
             Resp<SpuInfoEntity> spuInfoEntityResp = this.gmallPmsClient.querySpuById(skuInfoEntity.getSpuId());
@@ -71,6 +72,7 @@ public class ItemServiceImpl implements ItemService {
         }, threadPoolExecutor);
 
         // 5.设置图片信息
+        //另开一个异步编排，获取图片信息
         CompletableFuture<Void> picCompletableFuture = CompletableFuture.runAsync(() -> {
             Resp<List<String>> picsResp = this.gmallPmsClient.queryPicsBySkuId(skuId);
             itemVO.setPics(picsResp.getData());
@@ -78,12 +80,14 @@ public class ItemServiceImpl implements ItemService {
 
 
         // 6.营销信息
+        //另开一个异步编排，获取营销信息
         CompletableFuture<Void> saleCompletableFuture = CompletableFuture.runAsync(() -> {
             Resp<List<ItemSaleVO>> itemSaleResp = this.gmallSmsClient.queryItemSaleVOs(skuId);
             itemVO.setSales(itemSaleResp.getData());
         }, threadPoolExecutor);
 
         // 7.是否有货
+        //另开一个异步编排，获取营销信息
         CompletableFuture<Void> storeCompletableFuture = CompletableFuture.runAsync(() -> {
             Resp<List<WareSkuEntity>> wareSkuResp = this.gmallWmsClient.queryWareSkuBySkuId(skuId);
             List<WareSkuEntity> wareSkuEntities = wareSkuResp.getData();
@@ -91,12 +95,14 @@ public class ItemServiceImpl implements ItemService {
         }, threadPoolExecutor);
 
         // 8.spu所有的销售属性
+        //使用第一步的异步编排结果，查询所有的营销信息，方法本身没有返回值
         CompletableFuture<Void> spuSaleCompletableFuture = skuCompletableFuture.thenAcceptAsync(skuInfoEntity -> {
             Resp<List<SkuSaleAttrValueEntity>> saleAttrValueResp = this.gmallPmsClient.querySaleAttrValues(skuInfoEntity.getSpuId());
             itemVO.setSkuSales(saleAttrValueResp.getData());
         }, threadPoolExecutor);
 
         // 9.spu的描述信息
+        //使用第一步的异步编排结果，查询spu的描述信息，自己本身没有返回值
         CompletableFuture<Void> descCompletableFuture = skuCompletableFuture.thenAcceptAsync(skuInfoEntity -> {
             Resp<SpuInfoDescEntity> spuInfoDescEntityResp = this.gmallPmsClient.querySpuDescById(skuInfoEntity.getSpuId());
             itemVO.setDesc(spuInfoDescEntityResp.getData());
@@ -104,11 +110,13 @@ public class ItemServiceImpl implements ItemService {
 
 
         // 10.规格属性分组及组下的规格参数及值
+        //使用第一步的异步编排结果，查询所有的规格参数组，以及规格名称和值，自己本身没有返回值
         CompletableFuture<Void> groupCompletableFuture = skuCompletableFuture.thenAcceptAsync(skuInfoEntity -> {
             Resp<List<GroupVO>> listResp = this.gmallPmsClient.queryGroupVOByCid(skuInfoEntity.getCatalogId(), skuInfoEntity.getSpuId());
             itemVO.setGroups(listResp.getData());
         }, threadPoolExecutor);
 
+        //当所有的异步编排结果全部查询出来的时候，返回这个vo对象
         CompletableFuture.allOf(brandCompletableFuture, categoryCompletableFuture, spuCompletableFuture
                 , picCompletableFuture, saleCompletableFuture, storeCompletableFuture, spuSaleCompletableFuture, descCompletableFuture, groupCompletableFuture).join();
 
