@@ -1,0 +1,19 @@
+server:
+  port: 8092
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  redis:
+    host: 192.168.79.129
+  rabbitmq:
+    host: 192.168.79.129
+    virtual-host: /fjc
+    username: fjc
+    password: fjc
+
+gmall:
+  jwt:
+    publicKeyPath: E:\\workspaceIDEA\\project\\tmp\\rsa\\rsa.pub
+    cookieName: GMALL_TOKEN

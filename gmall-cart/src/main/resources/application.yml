@@ -1,6 +1,11 @@
 server:
   port: 8090
 spring:
+  rabbitmq:
+    host: 192.168.79.129
+    username: fjc
+    password: fjc
+    virtual-host: /fjc
   cloud:
     nacos:
       discovery:
