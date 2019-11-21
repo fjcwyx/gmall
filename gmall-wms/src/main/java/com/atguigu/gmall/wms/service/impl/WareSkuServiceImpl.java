@@ -61,7 +61,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             });
         return "锁定失败："+ error.stream().map(sku -> sku.getSkuId()).collect(Collectors.toList()).toString();
         }
-            return "锁定成功";
+            return null;
     }
 
     private void lockSku(SkuLockVO skuLockVO) {

@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -40,7 +41,10 @@ public class WareSkuController {
     @PostMapping("checklock")
     public Resp<Object> chechAndLock(@RequestBody List<SkuLockVO> skuLockVOS){
         String msg = this.wareSkuService.chechAndLock(skuLockVOS);
-        return Resp.ok(msg);
+        if (!StringUtils.isEmpty(msg)){
+            return Resp.fail(msg);
+        }
+        return Resp.ok(null);
     }
 
     @GetMapping("{skuId}")

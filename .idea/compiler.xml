@@ -17,6 +17,7 @@
         <module name="gmall-generator" />
         <module name="gmall-index" />
         <module name="gmall-gateway" />
+        <module name="gmall-oms-interface" />
         <module name="gmall-ums-interface" />
         <module name="gmall-pms" />
         <module name="gmall-sms-interface" />
