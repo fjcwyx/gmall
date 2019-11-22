@@ -1,5 +1,6 @@
 package com.atguigu.gmall.wms.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.atguigu.core.bean.PageVo;
 import com.atguigu.core.bean.Query;
 import com.atguigu.core.bean.QueryCondition;
@@ -12,7 +13,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -28,6 +31,12 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
 
     @Autowired
     private WareSkuDao wareSkuDao;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Override
     public PageVo queryPage(QueryCondition params) {
@@ -61,6 +70,12 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
             });
         return "锁定失败："+ error.stream().map(sku -> sku.getSkuId()).collect(Collectors.toList()).toString();
         }
+        //保存锁定库存信息到redis
+        String orderToken = skuLockVOS.get(0).getOrderToken();
+        this.redisTemplate.opsForValue().set("order:stock:"+orderToken, JSON.toJSONString(skuLockVOS));
+        //发送延时消息，20分钟解锁库存
+        this.amqpTemplate.convertAndSend("WMS-EXCHANGE", "wms.unlock",orderToken);
+
             return null;
     }
 

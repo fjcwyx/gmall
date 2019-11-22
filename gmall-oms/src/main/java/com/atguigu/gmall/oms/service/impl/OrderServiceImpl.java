@@ -39,6 +39,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     @Autowired
     private AmqpTemplate amqpTemplate; //rabbitMQ消息队列
 
+    @Autowired
+    private OrderDao orderDao;
+
     @Override
     public PageVo queryPage(QueryCondition params) {
         IPage<OrderEntity> page = this.page(
@@ -108,9 +111,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
             });
         }
 
-       // this.amqpTemplate.convertAndSend("OMS-EXCHANGE", "oms.close", submitVO.getOrderToken());
+       this.amqpTemplate.convertAndSend("OMS-EXCHANGE", "oms.close", submitVO.getOrderToken());
 
         return orderEntity;
+    }
+
+    @Override
+    public int closeOrder(String orderToken) {
+        return this.orderDao.closeOrder(orderToken);
     }
 
 }

@@ -157,7 +157,7 @@ public class OrderService {
             SkuLockVO skuLockVO = new SkuLockVO();
             skuLockVO.setSkuId(orderItemVO.getSkuId());
             skuLockVO.setCount(orderItemVO.getCount());
-            //skuLockVO.setOrderToken(orderToken);
+            skuLockVO.setOrderToken(orderToken);
             return skuLockVO;
         }).collect(Collectors.toList());
 
@@ -180,7 +180,7 @@ public class OrderService {
 
         } catch (Exception e) {
             e.printStackTrace();
-//          this.amqpTemplate.convertAndSend("WMS-EXCHANGE", "wms.ttl", orderToken);
+            this.amqpTemplate.convertAndSend("WMS-EXCHANGE", "wms.ttl", orderToken);
             throw new RuntimeException("订单创建失败！服务器异常！");
         }
 
