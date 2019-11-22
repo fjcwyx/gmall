@@ -121,4 +121,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
         return this.orderDao.closeOrder(orderToken);
     }
 
+    @Override
+    public int success(String orderToken) {
+        return this.orderDao.success(orderToken);
+    }
+
 }

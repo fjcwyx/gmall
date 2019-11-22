@@ -51,8 +51,6 @@ public class OrderService {
     @Autowired
     private GmallOmsFeign gmallOmsClient;
 
-
-
     @Autowired
     private StringRedisTemplate redisTemplate;
 
@@ -130,7 +128,7 @@ public class OrderService {
         return orderConfirmVO;
     }
 
-    public void submit(OrderSubmitVO orderSubmitVO) {
+    public OrderEntity submit(OrderSubmitVO orderSubmitVO) {
         //1. 验证令牌防止重复提交
         String orderToken = orderSubmitVO.getOrderToken();
         String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
@@ -180,7 +178,8 @@ public class OrderService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            this.amqpTemplate.convertAndSend("WMS-EXCHANGE", "wms.ttl", orderToken);
+            //创建订单时出现异常，马上发送消息、解锁库存
+//            this.amqpTemplate.convertAndSend("WMS-EXCHANGE", "wms.ttl", orderToken);
             throw new RuntimeException("订单创建失败！服务器异常！");
         }
 
@@ -191,9 +190,14 @@ public class OrderService {
         map.put("skuIds", skuIds);
         this.amqpTemplate.convertAndSend("GMALL-ORDER-EXCHANGE", "cart.delete", map);
 
-//        if (orderResp != null) {
-//            return orderResp.getData();
-//        }
-//        return null;
+        if (orderResp != null) {
+            return orderResp.getData();
+        }
+        return null;
+    }
+
+    public void paySuccess(String out_trade_no) {
+
+        this.amqpTemplate.convertAndSend("GMALL-ORDER-EXCHANGE","order.pay",out_trade_no);
     }
 }
