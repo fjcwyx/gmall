@@ -6,7 +6,7 @@
     <groupId>com.atguigu</groupId>
     <artifactId>gmall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <description>谷粒商城,测试数据</description>
+    <description>谷粒商城,测试数据，再次测试</description>
     <packaging>pom</packaging>
 
     <modules>
