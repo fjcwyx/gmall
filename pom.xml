@@ -7,10 +7,6 @@
     <artifactId>gmall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>谷粒商城</description>
-    <description>第一次更新</description>
-
-    <description>第二次提交</description>
-
     <packaging>pom</packaging>
 
     <modules>
