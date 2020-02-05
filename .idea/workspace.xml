@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6c7d19d-25a7-4222-bdfb-0bd44c3e39ca" name="Default Changelist" comment="" />
+    <list default="true" id="c6c7d19d-25a7-4222-bdfb-0bd44c3e39ca" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/gmall-core/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -61,8 +63,8 @@
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="28" column="43" lean-forward="true" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+            <state relative-caret-position="270">
+              <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -172,8 +174,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="42" />
-    <option name="y" value="91" />
+    <option name="x" value="40" />
+    <option name="y" value="90" />
     <option name="width" value="1555" />
     <option name="height" value="945" />
   </component>
@@ -573,7 +575,21 @@
       <option name="project" value="LOCAL" />
       <updated>1580733766292</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Revert &quot;恢复完美状态&quot;&#10;&#10;This reverts commit b0f94291">
+      <created>1580916004102</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916004102</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Revert &quot;恢复文件&quot;&#10;&#10;This reverts commit 0de1729b">
+      <created>1580916106912</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916106912</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -609,7 +625,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="328474000" />
+    <option name="totallyTimeSpent" value="328629000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -622,6 +638,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
@@ -759,7 +776,9 @@
     <MESSAGE value="第二次提交" />
     <MESSAGE value="第十四次添加" />
     <MESSAGE value="恢复" />
-    <option name="LAST_COMMIT_MESSAGE" value="恢复" />
+    <MESSAGE value="Revert &quot;恢复完美状态&quot;&#10;&#10;This reverts commit b0f94291" />
+    <MESSAGE value="Revert &quot;恢复文件&quot;&#10;&#10;This reverts commit 0de1729b" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;恢复文件&quot;&#10;&#10;This reverts commit 0de1729b" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1169,8 +1188,8 @@
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="28" column="43" lean-forward="true" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
+        <state relative-caret-position="270">
+          <caret line="10" column="30" lean-forward="true" selection-start-line="10" selection-start-column="30" selection-end-line="10" selection-end-column="30" />
         </state>
       </provider>
     </entry>
