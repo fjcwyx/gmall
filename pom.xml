@@ -8,7 +8,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <description>谷粒商城</description>
     <description>谷粒商城1</description>
-    <description>谷粒商城2</description>
     <packaging>pom</packaging>
 
     <modules>
