@@ -7,20 +7,6 @@
     <artifactId>gmall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>谷粒商城</description>
-    <description>谷粒商城1</description>
-    <description>谷粒商城2</description>
-    <description>谷粒商城3</description>
-    <description>谷粒商城4</description>
-    <description>谷粒商城5</description>
-    <description>谷粒商城6</description>
-    <description>谷粒商城7</description>
-    <description>谷粒商城8</description>
-    <description>谷粒商城9</description>
-    <description>谷粒商城10</description>
-    <description>谷粒商城11</description>
-    <description>谷粒商城12</description>
-    <description>谷粒商城13</description>
-    <description>谷粒商城14</description>
     <packaging>pom</packaging>
 
     <modules>
