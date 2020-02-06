@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c6c7d19d-25a7-4222-bdfb-0bd44c3e39ca" name="Default Changelist" comment="">
+    <list default="true" id="c6c7d19d-25a7-4222-bdfb-0bd44c3e39ca" name="Default Changelist" comment="squash! 4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/gmall-core/target/" />
@@ -61,12 +62,12 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+            <state relative-caret-position="243">
+              <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
             </state>
           </provider>
+          <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
         </entry>
       </file>
     </leaf>
@@ -188,6 +189,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -199,7 +201,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -457,8 +458,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9802417b-9428-462b-a6ba-f48b671188e8" name="Default Changelist" comment="" />
-      <changelist id="05f36bfd-0379-46f6-94c3-8aa2820dc5e9" name="sendMsg" comment="" />
+      <changelist id="c6c7d19d-25a7-4222-bdfb-0bd44c3e39ca" name="Default Changelist" comment="squash! 4" />
       <created>1572266891397</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -532,6 +532,7 @@
       <workItem from="1580649795628" duration="2802000" />
       <workItem from="1580733243654" duration="1209000" />
       <workItem from="1580735778368" duration="895000" />
+      <workItem from="1580971602047" duration="685000" />
     </task>
     <task id="LOCAL-00001" summary="测试git">
       <created>1580366410621</created>
@@ -624,7 +625,49 @@
       <option name="project" value="LOCAL" />
       <updated>1580916325432</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="恢复文件">
+      <created>1580916578900</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916578900</updated>
+    </task>
+    <task id="LOCAL-00015" summary="1">
+      <created>1580916626508</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916626508</updated>
+    </task>
+    <task id="LOCAL-00016" summary="2">
+      <created>1580916641617</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916641617</updated>
+    </task>
+    <task id="LOCAL-00017" summary="3">
+      <created>1580916663346</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916663347</updated>
+    </task>
+    <task id="LOCAL-00018" summary="4">
+      <created>1580916677435</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916677435</updated>
+    </task>
+    <task id="LOCAL-00019" summary="5">
+      <created>1580916690477</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1580916690477</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -660,7 +703,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="328915000" />
+    <option name="totallyTimeSpent" value="330259000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -681,7 +724,7 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Web" order="4" side_tool="true" />
       <window_info id="Designer" order="5" />
-      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.26407507" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.26742628" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.32258064" />
       <window_info anchor="bottom" id="Spring" order="1" />
@@ -813,8 +856,10 @@
     <MESSAGE value="恢复" />
     <MESSAGE value="Revert &quot;恢复完美状态&quot;&#10;&#10;This reverts commit b0f94291" />
     <MESSAGE value="Revert &quot;恢复文件&quot;&#10;&#10;This reverts commit 0de1729b" />
+    <MESSAGE value="恢复文件" />
     <MESSAGE value="1" />
     <MESSAGE value="2" />
+    <MESSAGE value="3" />
     <MESSAGE value="4" />
     <MESSAGE value="5" />
     <option name="LAST_COMMIT_MESSAGE" value="5" />
@@ -1210,12 +1255,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gmall-oms/pom.xml">
-      <provider selected="true" editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="576">
           <caret line="27" column="56" lean-forward="true" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
         </state>
       </provider>
+      <provider selected="true" editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/gmall-oms/src/main/java/com/atguigu/gmall/oms/GmallOmsApplication.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1225,12 +1270,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="8" column="35" lean-forward="true" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        <state relative-caret-position="243">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
         </state>
       </provider>
+      <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
   </component>
   <component name="masterDetails">
